@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Certificates - Shivani Jayprakash Tiwari</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        :root {
+            --bg: #0a0f2e;
+            --panel: #111827;
+            --muted: #9fb0d3;
+            --accent1: #7f5af0;
+            --accent2: #ff6ec7;
+            --accent3: #00d4ff;
+            --accent4: #ffaa00;
+        }
+        
+        body {
+            background: linear-gradient(180deg, var(--bg) 0%, #0a0f2e 100%);
+            color: #e6eef8;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(127, 90, 240, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 110, 199, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .certificate-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .certificate-container {
+            padding: 80px 0;
+            min-height: 100vh;
+        }
+        
+        .certificate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .certificate-grid::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(ellipse at center, rgba(127, 90, 240, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .certificate-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 0;
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .certificate-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--accent1), var(--accent2), var(--accent3), var(--accent4));
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            filter: blur(10px);
+        }
+        
+        .certificate-card:hover::before {
+            left: 100%;
+        }
+        
+        .certificate-card:hover::after {
+            opacity: 0.7;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(127, 90, 240, 0.4);
+            border-color: var(--accent1);
+        }
+        
+        .certificate-header {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .certificate-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .certificate-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .certificate-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .certificate-icon::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, var(--accent3), var(--accent4));
+            border-radius: 15px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .certificate-card:hover .certificate-icon {
+            transform: rotate(360deg) scale(1.1);
+            background: rgba(255,255,255,0.35);
+        }
+        
+        .certificate-card:hover .certificate-icon::before {
+            opacity: 1;
+        }
+        
+        .certificate-title {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 0;
+        }
+        
+        .certificate-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: brightness(0.9);
+        }
+        
+        .certificate-card:hover .certificate-image {
+            transform: scale(1.08);
+            filter: brightness(1.1);
+        }
+        
+        .certificate-details {
+            padding: 25px;
+        }
+        
+        .section-title {
+            font-weight: 700; 
+            letter-spacing: 0.6px; 
+            color: var(--accent1); 
+            position: relative; 
+            font-size: 2.2rem;
+            text-shadow: 0 0 30px rgba(127, 90, 240, 0.5);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 30px rgba(127, 90, 240, 0.5); }
+            to { text-shadow: 0 0 50px rgba(127, 90, 240, 0.8), 0 0 70px rgba(255, 110, 199, 0.5); }
+        }
+        
+        .certificate-name {
+            color: var(--accent1);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .certificate-name::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent1), var(--accent2));
+            transition: width 0.3s ease;
+        }
+        
+        .certificate-card:hover .certificate-name::after {
+            width: 100%;
+        }
+        
+        .certificate-info {
+            color: #e6eef8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .certificate-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: rgba(255,255,255,0.03);
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        
+        .certificate-date {
+            color: var(--accent2);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .certificate-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-certificate {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(127, 90, 240, 0.3);
+        }
+        
+        .btn-certificate::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-certificate:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-certificate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(127, 90, 240, 0.5);
+        }
+        
+        .btn-outline-certificate {
+            background: transparent;
+            border: 2px solid var(--accent1);
+            color: var(--accent1);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-certificate:hover {
+            background: var(--accent1);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .back-link {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(127, 90, 240, 0.3);
+        }
+        
+        .back-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .back-link:hover::before {
+            left: 100%;
+        }
+        
+        .back-link:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(127, 90, 240, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .certificate-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+                gap: 25px;
+            }
+            
+            .certificate-container {
+                padding: 60px 0;
+            }
+            
+            .back-link {
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .certificate-card:hover {
+                transform: translateY(-10px) scale(1.01);
+            }
+        }
+        
+        /* Loading animation */
+        .certificate-card {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Glow effect on hover */
+        .certificate-card:hover {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 25px 50px rgba(127, 90, 240, 0.4);
+            }
+            to {
+                box-shadow: 0 25px 50px rgba(127, 90, 240, 0.6), 0 0 30px rgba(127, 90, 240, 0.3);
+            }
+        }
+        
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(127, 90, 240, 0.6);
+            border-radius: 50%;
+            animation: floatUp 15s infinite linear;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Enhanced cursor effects */
+        body {
+            cursor: none;
+        }
+        
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent1);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: rgba(127, 90, 240, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Magnetic buttons */
+        .btn-certificate, .btn-outline-certificate, .back-link {
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        
+        /* Enhanced card flip effect */
+        .certificate-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-15px) scale(1.02) rotateX(2deg);
+        }
+        
+        /* Scroll reveal enhancements */
+        .certificate-card {
+            opacity: 0;
+            transform: translateY(50px) rotateX(-10deg);
+            animation: revealCard 0.8s ease-out forwards;
+        }
+        
+        @keyframes revealCard {
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+        
+        /* Parallax scrolling effect */
+        .certificate-container {
+            transform-style: preserve-3d;
+        }
+        
+        .certificate-grid {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        
+        /* Enhanced loading states */
+        .certificate-image {
+            filter: brightness(0.9) saturate(0.8);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .certificate-card:hover .certificate-image {
+            filter: brightness(1.2) saturate(1.2) contrast(1.1);
+            transform: scale(1.08) rotateY(2deg);
+        }
+        
+        /* Interactive background */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(127, 90, 240, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at calc(100% - var(--mouse-x, 50%)) var(--mouse-y, 50%), rgba(255, 110, 199, 0.1) 0%, transparent 25%);
+            pointer-events: none;
+            z-index: 0;
+            transition: all 0.3s ease;
+        }
+        
+        /* Enhanced text effects */
+        .certificate-name {
+            background: linear-gradient(45deg, var(--accent1), var(--accent2), var(--accent3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Micro-interactions */
+        .certificate-meta {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .certificate-meta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(127, 90, 240, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .certificate-card:hover .certificate-meta::before {
+            left: 100%;
+        }
+        
+        /* Staggered animation delays */
+        .certificate-card:nth-child(1) { animation-delay: 0.1s; }
+        .certificate-card:nth-child(2) { animation-delay: 0.2s; }
+        .certificate-card:nth-child(3) { animation-delay: 0.3s; }
+        .certificate-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+    
+    <!-- Floating Particles Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Back to Portfolio -->
+    <a href="index.html" class="back-link" data-aos="fade-right">
+        <i class="fa-solid fa-arrow-left me-2"></i> Back to Portfolio
+    </a>
+
+    <div class="certificate-container">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title" style="font-weight: 700; letter-spacing: 0.6px; color: var(--accent1); position: relative; font-size: 2.2rem;">
+                    <i class="fa-solid fa-certificate me-3"></i> My Certificates
+                </h2>
+                <div class="title-decoration" style="width: 80px; height: 3px; background: linear-gradient(90deg, var(--accent1), var(--accent2)); margin: 15px auto 0; border-radius: 2px;"></div>
+                <p class="section-subtitle mt-3" style="color: #9fb0d3; font-size: 1.1rem; font-weight: 300;">Professional certifications and achievements</p>
+            </div>
+
+            <div class="certificate-grid">
+                <!-- Certificate 1 - Best Leader Award -->
+                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="certificate-header">
+                        <div class="certificate-icon">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div class="certificate-title">Best Leader Award</div>
+                    </div>
+                    
+                    <img src="./images/certificates/leader-award.jpg" alt="Best Leader Award" class="certificate-image">
+                    
+                    <div class="certificate-details">
+                        <h3 class="certificate-name">NSS State Level Camps</h3>
+                        <p class="certificate-info">
+                            Awarded 'Best Leader' for outstanding performance and leadership skills during NSS state-level camps. 
+                            Demonstrated exceptional team management and organizational abilities.
+                        </p>
+                        
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="fa-solid fa-calendar me-2"></i>
+                                2023-2024
+                            </div>
+                            <div class="certificate-actions">
+                                <a href="./images/certificates/leader-award.jpg" target="_blank" class="btn-certificate">
+                                    <i class="fa-solid fa-eye me-1"></i> View
+                                </a>
+                                <a href="./images/certificates/leader-award.jpg" download class="btn-outline-certificate">
+                                    <i class="fa-solid fa-download me-1"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 2 - AI & ML Internship -->
+                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="certificate-header">
+                        <div class="certificate-icon">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="certificate-title">AI & ML Internship</div>
+                    </div>
+                    
+                    <img src="./images/AI certifdicate.png" alt="AI & ML Internship" class="certificate-image">
+                    
+                    <div class="certificate-details">
+                        <h3 class="certificate-name">Machine Learning Internship</h3>
+                        <p class="certificate-info">
+                            Completed 1-month intensive internship in Artificial Intelligence and Machine Learning using Python. 
+                            Gained hands-on experience with NumPy, Pandas, and scikit-learn.
+                        </p>
+                        
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="fa-solid fa-calendar me-2"></i>
+                                2024
+                            </div>
+                            <div class="certificate-actions">
+                                <a href="./images/certificates/ai-ml-internship.jpg" target="_blank" class="btn-certificate">
+                                    <i class="fa-solid fa-eye me-1"></i> View
+                                </a>
+                                <a href="./images/certificates/ai-ml-internship.jpg" download class="btn-outline-certificate">
+                                    <i class="fa-solid fa-download me-1"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 3 - Web Development -->
+                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="certificate-header">
+                        <div class="certificate-icon">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div class="certificate-title">Web Development</div>
+                    </div>
+                    
+                    <img src="./images/experinesletter.png" alt="Web Development Certificate" class="certificate-image">
+                    
+                    <div class="certificate-details">
+                        <h3 class="certificate-name">Web Development Bootcamp</h3>
+                        <p class="certificate-info">
+                            Successfully completed intensive web development bootcamp covering HTML, CSS, JavaScript, 
+                            and modern frameworks. Built multiple real-world projects.
+                        </p>
+                        
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="fa-solid fa-calendar me-2"></i>
+                                2023
+                            </div>
+                            <div class="certificate-actions">
+                                <a href="../images/experinesletter.png" target="_blank" class="btn-certificate">
+                                    <i class="fa-solid fa-eye me-1"></i> View
+                                </a>
+                                <a href="./images/experinesletter.png" download class="btn-outline-certificate">
+                                    <i class="fa-solid fa-download me-1"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 4 - Database Management -->
+                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="certificate-header">
+                        <div class="certificate-icon">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <div class="certificate-title">Database</div>
+                    </div>
+                    
+                    <img src="./images/certificates/database-management.jpg" alt="Database Management Certificate" class="certificate-image">
+                    
+                    <div class="certificate-details">
+                        <h3 class="certificate-name">Database Management Fundamentals</h3>
+                        <p class="certificate-info">
+                            Completed comprehensive course on database design, management, and optimization. 
+                            Gained expertise in SQL and NoSQL database systems.
+                        </p>
+                        
+                        <div class="certificate-meta">
+                            <div class="certificate-date">
+                                <i class="fa-solid fa-calendar me-2"></i>
+                                2022
+                            </div>
+                            <div class="certificate-actions">
+                                <a href="./images/certificates/database-management.jpg" target="_blank" class="btn-certificate">
+                                    <i class="fa-solid fa-eye me-1"></i> View
+                                </a>
+                                <a href="./images/certificates/database-management.jpg" download class="btn-outline-certificate">
+                                    <i class="fa-solid fa-download me-1"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AOS Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1200,
+            once: true
+        });
+        
+        // Custom cursor functionality
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let followerX = 0, followerY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Update CSS variables for interactive background
+            const xPercent = (mouseX / window.innerWidth) * 100;
+            const yPercent = (mouseY / window.innerHeight) * 100;
+            document.documentElement.style.setProperty('--mouse-x', xPercent + '%');
+            document.documentElement.style.setProperty('--mouse-y', yPercent + '%');
+        });
+        
+        // Smooth cursor animation
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.5;
+            cursorY += (mouseY - cursorY) * 0.5;
+            
+            followerX += (mouseX - followerX) * 0.1;
+            followerY += (mouseY - followerY) * 0.1;
+            
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
+            
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        
+        // Magnetic button effect
+        const magneticElements = document.querySelectorAll('.btn-certificate, .btn-outline-certificate, .back-link');
+        
+        magneticElements.forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                element.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.2)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translate(0, 0) scale(1)';
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+        
+        // Hide cursor on mobile
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
+            cursorFollower.style.display = 'none';
+            document.body.style.cursor = 'auto';
+        }
+        
+        // Generate floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                
+                // Random colors for particles
+                const colors = ['rgba(127, 90, 240, 0.6)', 'rgba(255, 110, 199, 0.6)', 'rgba(0, 212, 255, 0.6)', 'rgba(255, 170, 0, 0.6)'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Parallax scrolling effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.certificate-card');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
+            });
+        });
+        
+        // Enhanced card interactions
+        const cards = document.querySelectorAll('.certificate-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                cursor.style.borderColor = 'var(--accent2)';
+                cursorFollower.style.background = 'rgba(255, 110, 199, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                cursor.style.borderColor = 'var(--accent1)';
+                cursorFollower.style.background = 'rgba(127, 90, 240, 0.1)';
+            });
+        });
+        
+        // Initialize particles on page load
+        document.addEventListener('DOMContentLoaded', createParticles);
+        
+        // Add loading completion effect
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
